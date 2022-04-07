@@ -12,9 +12,7 @@ import (
 func validateFactorialMiddleware(handle httprouter.Handle, c controller.APIController) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		r2 := tools.CopyHttpRequest(r)
-		err := c.Factorial.ValidateFactorialData(r2)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+		if errors := c.Factorial.ValidateFactorialData(w,r2); errors != nil {
 			return
 		}
 		handle(w, r, p)

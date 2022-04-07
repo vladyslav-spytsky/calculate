@@ -9,7 +9,7 @@ import (
 type factorialUsecase struct{}
 
 type FactorialUsecase interface {
-	ValidateFactorialData(*model.Factorial) error
+	ValidateFactorialData(map[string]int) error
 	CalculateFactorial(*model.Factorial) (*model.Factorial, error)
 }
 
@@ -31,8 +31,20 @@ func (fu *factorialUsecase) CalculateFactorial(f *model.Factorial) (*model.Facto
 	return factorialResponse, nil
 }
 
-func (fu *factorialUsecase) ValidateFactorialData(f *model.Factorial) error {
-	if f.A > 20 || f.A < 0 || f.B > 20 || f.B < 0 {
+func (fu *factorialUsecase) ValidateFactorialData(f map[string]int) error {
+	if _, ok := f["a"]; !ok {
+		return errors.New("incorrect input")
+	}
+
+	if _, ok := f["b"]; !ok {
+		return errors.New("incorrect input")
+	}
+
+	if len(f) > 2 {
+		return errors.New("incorrect input")
+	}
+
+	if f["a"] > 20 ||f["a"] < 0 || f["b"] > 20 || f["b"] < 0 {
 		return errors.New("incorrect input")
 	}
 	return nil
