@@ -32,7 +32,7 @@ func (fu *factorialUsecase) CalculateFactorial(f *model.Factorial) (*model.Facto
 }
 
 func (fu *factorialUsecase) ValidateFactorialData(f *model.Factorial) error {
-	if f.A < 0 || f.B < 0 {
+	if f.A > 20 || f.A < 0 || f.B > 20 || f.B < 0 {
 		return errors.New("incorrect input")
 	}
 	return nil
