@@ -22,9 +22,9 @@ func (fu *factorialUsecase) CalculateFactorial(f *model.Factorial) (*model.Facto
 	chA := make(chan int)
 	chB := make(chan int)
 
-	go tools.FactorialCalculate(f.A, chA, "a")
+	go tools.FactorialCalculate(f.A, chA)
 
-	go tools.FactorialCalculate(f.B, chB, "b")
+	go tools.FactorialCalculate(f.B, chB)
 
 	factorialResponse := &model.Factorial{A: <-chA, B: <-chB}
 

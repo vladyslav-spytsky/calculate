@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func FactorialCalculate(value int, ch chan<- int, symbol string) {
+func FactorialCalculate(value int, ch chan<- int) {
 	res := 1
 	for i := 1; i <= value; i++ {
 		res *= i
